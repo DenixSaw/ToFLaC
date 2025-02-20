@@ -1,0 +1,50 @@
+<Window x:Class="ToFLaC.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ToFLaC.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21px"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл"  Padding="5 2 5 0">
+                <MenuItem Header="Создать"/>
+                <MenuItem Header="Открыть"/>
+                <MenuItem Header="Сохранить"/>
+                <MenuItem Header="Сохранить как"/>
+                <MenuItem Header="Выход"/>
+            </MenuItem>
+            <MenuItem Header="Правка"  Padding="10 2 10 0 ">
+                <MenuItem Header="Отменить"/>
+                <MenuItem Header="Повторить"/>
+                <MenuItem Header="Вырезать"/>
+                <MenuItem Header="Копировать"/>
+                <MenuItem Header="Вставить"/>
+                <MenuItem Header="Удалить"/>
+                <MenuItem Header="Выделить все"/>
+            </MenuItem>
+            <MenuItem Header="Текст"  Padding="10 2 10 0 ">
+                <MenuItem Header="Постановка задачи"/>
+                <MenuItem Header="Грамматика"/>
+                <MenuItem Header="Классификация грамматики"/>
+                <MenuItem Header="Метод анализа"/>
+                <MenuItem Header="Диагностика и нейтрализация ошибок"/>
+                <MenuItem Header="Тестовый пример"/>
+                <MenuItem Header="Спиксок литературы"/>
+                <MenuItem Header="Исходный код программы"/>
+            </MenuItem>
+            <MenuItem Header="Пуск"  Padding="10 2 10 0 "/>
+            <MenuItem Header="Справка"  Padding="10 2 10 0 ">
+                <MenuItem Header="Вызов справки"/>
+                <MenuItem Header="О программе"/>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>

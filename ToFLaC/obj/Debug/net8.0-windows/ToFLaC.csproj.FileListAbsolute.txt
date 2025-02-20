@@ -3,11 +3,9 @@ C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\bin\Debug\net8.0-windows\ToFLaC.deps.
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\bin\Debug\net8.0-windows\ToFLaC.runtimeconfig.json
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\bin\Debug\net8.0-windows\ToFLaC.dll
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\bin\Debug\net8.0-windows\ToFLaC.pdb
-C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\MainWindow.g.cs
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC_MarkupCompile.cache
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC_MarkupCompile.lref
-C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\MainWindow.baml
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.g.resources
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.AssemblyInfoInputs.cache
@@ -18,3 +16,6 @@ C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\refint\ToFLa
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.pdb
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.genruntimeconfig.cache
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ref\ToFLaC.dll
+C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\View\MainWindow.g.cs
+C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\View\MainWindow.baml
+C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.sourcelink.json
