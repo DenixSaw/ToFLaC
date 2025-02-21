@@ -5,11 +5,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ToFLaC.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Icon="../Styles/IMG/logo.png"
+        Title="ToFLaC Parser" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="../Styles/styles/MainStyle.xaml"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="21px"/>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="40px"/>
             <RowDefinition Height="0.4*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
@@ -40,11 +44,84 @@
                 <MenuItem Header="Спиксок литературы"/>
                 <MenuItem Header="Исходный код программы"/>
             </MenuItem>
-            <MenuItem Header="Пуск"  Padding="10 2 10 0 "/>
+            <Button Width="15px" Height="15px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource NoBorderButton}" BorderThickness="0">
+                <Image Source="../Styles/IMG/playGreen.png"/>
+            </Button>
             <MenuItem Header="Справка"  Padding="10 2 10 0 ">
                 <MenuItem Header="Вызов справки"/>
                 <MenuItem Header="О программе"/>
             </MenuItem>
         </Menu>
+        <Grid Grid.Row="1" Margin="20 0 20 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="95px"/>
+                <ColumnDefinition Width="50px"/>
+                <ColumnDefinition Width="60px"/>
+                <ColumnDefinition Width="50px"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/fileCreate.png"/>
+                </Button>
+                <Button Grid.Column="1" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/folderOpen.png"/>
+                </Button>
+                <Button Grid.Column="2" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/saveFile.png"/>
+                </Button>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/backArrow.png"/>
+                </Button>
+                <Button Grid.Column="1" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/forwardArrow.png"/>
+                </Button>
+            </Grid>
+            
+            <Grid Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                    <ColumnDefinition Width="30px"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonCopy_OnClick">
+                    <Image Source="../Styles/IMG/copy.png"/>
+                </Button>
+                <Button Grid.Column="1" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonCut_OnClick">
+                    <Image Source="../Styles/IMG/cut-out.png"/>
+                </Button>
+                <Button Grid.Column="2" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonInsert_OnClick">
+                    <Image Source="../Styles/IMG/insert.png"/>
+                </Button>
+                <Button Grid.Column="3" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/playGreen.png"/>
+                </Button>
+                <Button Grid.Column="4" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                    <Image Source="../Styles/IMG/about.png"/>
+                </Button>
+            </Grid>
+        </Grid>
+        <Border Grid.Row="2" Margin="20 0 20 10">
+            <Grid>
+                <TextBox x:Name="codeBox" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding EnteredCode, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </Grid>
+        </Border>
+        <Border Grid.Row="3" Margin="20 0 20 20" BorderBrush="Gray" BorderThickness="0.75px">
+            <TextBlock Padding="0 3 0 0"></TextBlock>
+        </Border>
     </Grid>
 </Window>

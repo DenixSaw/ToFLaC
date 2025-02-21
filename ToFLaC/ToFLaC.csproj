@@ -12,4 +12,51 @@
       <Folder Include="Model\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Styles\IMG\logo.png" />
+      <Resource Include="Styles\IMG\logo.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\saveFile.png" />
+      <Resource Include="Styles\IMG\saveFile.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\fileCreate.png" />
+      <Resource Include="Styles\IMG\fileCreate.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\folderOpen.png" />
+      <Resource Include="Styles\IMG\folderOpen.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\backArrow.png" />
+      <Resource Include="Styles\IMG\backArrow.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\forwardArrow.png" />
+      <Resource Include="Styles\IMG\forwardArrow.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\playGreen.png" />
+      <Resource Include="Styles\IMG\playGreen.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\about.png" />
+      <Resource Include="Styles\IMG\about.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\copy.png" />
+      <Resource Include="Styles\IMG\copy.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\cut-out.png" />
+      <Resource Include="Styles\IMG\cut-out.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\insert.png" />
+      <Resource Include="Styles\IMG\insert.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
 </Project>
