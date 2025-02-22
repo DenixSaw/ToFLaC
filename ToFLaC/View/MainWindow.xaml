@@ -19,20 +19,20 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="Файл"  Padding="5 2 5 0">
-                <MenuItem Header="Создать"/>
-                <MenuItem Header="Открыть"/>
-                <MenuItem Header="Сохранить"/>
-                <MenuItem Header="Сохранить как"/>
+                <MenuItem Header="Создать" Click="ButtonCreate_OnClick"/>
+                <MenuItem Header="Открыть" Click="ButtonOpen_OnClick"/>
+                <MenuItem Header="Сохранить" Click="ButtonSave_OnClick"/>
+                <MenuItem Header="Сохранить как" Click="ButtonSaveAs_OnClick"/>
                 <MenuItem Header="Выход"/>
             </MenuItem>
             <MenuItem Header="Правка"  Padding="10 2 10 0 ">
                 <MenuItem Header="Отменить"/>
                 <MenuItem Header="Повторить"/>
-                <MenuItem Header="Вырезать"/>
-                <MenuItem Header="Копировать"/>
-                <MenuItem Header="Вставить"/>
-                <MenuItem Header="Удалить"/>
-                <MenuItem Header="Выделить все"/>
+                <MenuItem Header="Вырезать" Click="ButtonCut_OnClick"/>
+                <MenuItem Header="Копировать" Click="ButtonCopy_OnClick"/>
+                <MenuItem Header="Вставить" Click="ButtonInsert_OnClick"/>
+                <MenuItem Header="Удалить" Click="MenuDelete_OnClick"/>
+                <MenuItem Header="Выделить все" Click="MenuSelect_OnClick"/>
             </MenuItem>
             <MenuItem Header="Текст"  Padding="10 2 10 0 ">
                 <MenuItem Header="Постановка задачи"/>
@@ -41,7 +41,7 @@
                 <MenuItem Header="Метод анализа"/>
                 <MenuItem Header="Диагностика и нейтрализация ошибок"/>
                 <MenuItem Header="Тестовый пример"/>
-                <MenuItem Header="Спиксок литературы"/>
+                <MenuItem Header="Список литературы"/>
                 <MenuItem Header="Исходный код программы"/>
             </MenuItem>
             <Button Width="15px" Height="15px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource NoBorderButton}" BorderThickness="0">
@@ -66,13 +66,13 @@
                     <ColumnDefinition Width="30px"></ColumnDefinition>
                     <ColumnDefinition Width="30px"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                <Button Grid.Column="0" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonCreate_OnClick">
                     <Image Source="../Styles/IMG/fileCreate.png"/>
                 </Button>
-                <Button Grid.Column="1" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                <Button Grid.Column="1" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonOpen_OnClick">
                     <Image Source="../Styles/IMG/folderOpen.png"/>
                 </Button>
-                <Button Grid.Column="2" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                <Button Grid.Column="2" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonSave_OnClick">
                     <Image Source="../Styles/IMG/saveFile.png"/>
                 </Button>
             </Grid>

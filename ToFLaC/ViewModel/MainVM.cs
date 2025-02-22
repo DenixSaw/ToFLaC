@@ -8,6 +8,5 @@ public class MainVM : BaseVM
     {
         get => enteredCode;
         set => Set(ref enteredCode, value);
-
     }
 }
