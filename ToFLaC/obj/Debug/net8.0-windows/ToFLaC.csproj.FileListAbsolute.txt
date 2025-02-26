@@ -20,3 +20,5 @@ C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\View\MainWin
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\View\MainWindow.baml
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\ToFLaC.sourcelink.json
 C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\Styles\styles\MainStyle.baml
+C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\View\AboutProgramWindow.g.cs
+C:\Users\dima2\RiderProjects\ToFLaC\ToFLaC\obj\Debug\net8.0-windows\View\AboutProgramWindow.baml

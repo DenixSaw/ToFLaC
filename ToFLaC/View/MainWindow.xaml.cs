@@ -1,5 +1,6 @@
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using ToFLaC.ViewModel;
 using Microsoft.Win32;
 
@@ -62,7 +63,6 @@ public partial class MainWindow : Window
     
     private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
     {
-        Console.WriteLine(fileName);
         MessageBoxResult resultOfBox = MessageBox.Show("Уверены, что хотите сохранить файл?","Сохранение",
             MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (resultOfBox == MessageBoxResult.Yes)
@@ -100,8 +100,13 @@ public partial class MainWindow : Window
 
     private void ButtonCreate_OnClick(object sender, RoutedEventArgs e)
     {
-        codeBox.Clear();
-        fileName = "";
+        MessageBoxResult resultOfBox = MessageBox.Show("Уверены, что создать новый файл? Несохраненные данные будут удалены","Создание нового файла",
+            MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (resultOfBox == MessageBoxResult.Yes)
+        {
+            codeBox.Clear();
+            fileName = "";
+        }
     }
 
     private void MenuDelete_OnClick(object sender, RoutedEventArgs e)
@@ -112,5 +117,33 @@ public partial class MainWindow : Window
     private void MenuSelect_OnClick(object sender, RoutedEventArgs e)
     {
         codeBox.SelectAll();
+    }
+
+    private void MenuExit_OnClick(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
+
+    private void MenuHelp_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Help.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(fullPath) { UseShellExecute = true });
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void MenuAboutProgram_OnClick(object sender, RoutedEventArgs e)
+    {
+        AboutProgramWindow aboutProgramWindow = new AboutProgramWindow();
+        aboutProgramWindow.ShowDialog();
     }
 }

@@ -57,6 +57,26 @@
       <Resource Include="Styles\IMG\insert.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="View\Help.html" />
+      <Resource Include="View\Help.html">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\ImageForControl1.png" />
+      <Resource Include="Styles\IMG\ImageForControl1.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\ImageForControl2.png" />
+      <Resource Include="Styles\IMG\ImageForControl2.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\ImageForControl3.png" />
+      <Resource Include="Styles\IMG\ImageForControl3.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\ImageForControl4.png" />
+      <Resource Include="Styles\IMG\ImageForControl4.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
