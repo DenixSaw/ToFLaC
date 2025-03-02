@@ -12,7 +12,6 @@ public partial class MainWindow : Window
     private OpenFileDialog openFileDialog;
     private string fileName = string.Empty;
     
-    
     public MainWindow()
     {
         InitializeComponent();
@@ -133,7 +132,11 @@ public partial class MainWindow : Window
 
         if (File.Exists(fullPath))
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(fullPath) { UseShellExecute = true });
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+            //Uri uri = new Uri(fullPath);
+            //this.webBrowser1.Source = uri;
+            //System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(fullPath) { UseShellExecute = true });
         }
         else
         {
@@ -145,5 +148,21 @@ public partial class MainWindow : Window
     {
         AboutProgramWindow aboutProgramWindow = new AboutProgramWindow();
         aboutProgramWindow.ShowDialog();
+    }
+    
+    private void TextBlockScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (e.VerticalChange != 0)
+        {
+            textBoxScrollViewer.ScrollToVerticalOffset(textBlockScrollViewer.VerticalOffset);
+        }
+    }
+
+    private void TextBoxScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (e.VerticalChange != 0)
+        {
+            textBlockScrollViewer.ScrollToVerticalOffset(textBoxScrollViewer.VerticalOffset);
+        }
     }
 }

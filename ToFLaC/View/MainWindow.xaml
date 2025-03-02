@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ToFLaC.View"
         mc:Ignorable="d"
         Icon="../Styles/IMG/logo.png"
-        Title="ToFLaC Parser" Height="450" Width="800">
+        Height="450" Width="800"
+        Title="ToFLaC Parser" MinHeight="450" MinWidth="800">
     <Window.Resources>
         <ResourceDictionary Source="../Styles/styles/MainStyle.xaml"/>
     </Window.Resources>
@@ -117,7 +118,21 @@
         </Grid>
         <Border Grid.Row="2" Margin="20 0 20 10">
             <Grid>
-                <TextBox x:Name="codeBox" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding EnteredCode, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35px"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Hidden" x:Name="textBlockScrollViewer" ScrollChanged="TextBlockScrollViewer_ScrollChanged" >
+                    <TextBlock Text="{Binding IndexesNumbers, UpdateSourceTrigger=PropertyChanged}" Background="#eaeaea" Padding="5px 0px 0px 0px" />
+                </ScrollViewer>
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" x:Name="textBoxScrollViewer" ScrollChanged="TextBoxScrollViewer_ScrollChanged">
+                    <TextBox x:Name="codeBox" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding EnteredCode, UpdateSourceTrigger=PropertyChanged}" IsUndoEnabled="False">
+                        <TextBox.InputBindings>
+                            <KeyBinding Modifiers="Control" Key="Z" Command="{Binding UndoCommand}" />
+                            <KeyBinding Modifiers="Control" Key="Y" Command="{Binding RedoCommand}" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </ScrollViewer>
             </Grid>
         </Border>
         <Border Grid.Row="3" Margin="20 0 20 20" BorderBrush="Gray" BorderThickness="0.75px">

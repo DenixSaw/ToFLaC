@@ -1,3 +1,7 @@
 .idea/
 /bin
 /obj
+/ToFLaC/bin
+/ToFLaC/obj
+/ToFLaC/bin/
+/ToFLaC/obj/
