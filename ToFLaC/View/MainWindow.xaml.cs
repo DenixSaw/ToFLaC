@@ -120,7 +120,9 @@ public partial class MainWindow : Window
 
     private void MenuExit_OnClick(object sender, RoutedEventArgs e)
     {
-        this.Close();
+        if (MessageBox.Show("Закрыть приложение?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            this.Close();
+        else return;
     }
 
     private void MenuHelp_OnClick(object sender, RoutedEventArgs e)
@@ -164,5 +166,16 @@ public partial class MainWindow : Window
         {
             textBlockScrollViewer.ScrollToVerticalOffset(textBoxScrollViewer.VerticalOffset);
         }
+    }
+
+    // Пока что placeholder (не работает).
+    private void UndoButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        codeBox.Undo();
+    }
+
+    private void RedoButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        codeBox.Redo();
     }
 }
