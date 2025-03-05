@@ -103,6 +103,10 @@ public partial class MainWindow : Window
             if (result == true)
             {
                 codeBox.Text = File.ReadAllText(openFileDialog.FileName);
+                if (DataContext is MainVM viewModel)
+                {
+                    viewModel.AttachTextBox(codeBox);
+                }
             }
         }
     }
@@ -115,6 +119,10 @@ public partial class MainWindow : Window
         {
             codeBox.Clear();
             fileName = "";
+            if (DataContext is MainVM viewModel)
+            {
+                viewModel.AttachTextBox(codeBox);
+            }
         }
     }
 
@@ -132,7 +140,6 @@ public partial class MainWindow : Window
     {
         if (MessageBox.Show("Закрыть приложение?\n Несохраненные данные будут удалены!", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             this.Close();
-        else return;
     }
 
     private void MenuExit_OnClickMenu(object sender, System.ComponentModel.CancelEventArgs e)

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ToFLaC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d46b52b6e8c57f8e120070ab12d74025b992aa96")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb75c2d313901a597bf4bf67d54715776a1d1af8")]
 [assembly: System.Reflection.AssemblyProductAttribute("ToFLaC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ToFLaC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

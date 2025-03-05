@@ -9,8 +9,8 @@ public class MainVM : BaseVM
     private string indexesNumbers = "0\n";
     private int numbersCount = 0;
 
-    private Stack<string> _undoStack = new();
-    private Stack<string> _redoStack = new();
+    private Stack<(string Text, int CaretPosition)> _undoStack = new();
+    private Stack<(string Text, int CaretPosition)> _redoStack = new();
     private bool _isUndoRedoOperation = false;
     private TextBox? _textBox;
 
@@ -21,7 +21,7 @@ public class MainVM : BaseVM
         {
             if (!_isUndoRedoOperation)
             {
-                _undoStack.Push(enteredCode);
+                _undoStack.Push((enteredCode, _textBox?.CaretIndex ?? 0));
                 _redoStack.Clear();
             }
 
@@ -43,6 +43,8 @@ public class MainVM : BaseVM
     public void AttachTextBox(TextBox textBox)
     {
         _textBox = textBox;
+        _undoStack = new();
+        _redoStack = new();
     }
 
     private void UpdateIndexesNumbers(string value)
@@ -73,37 +75,36 @@ public class MainVM : BaseVM
     {
         if (_undoStack.Count > 0)
         {
-            int caretPosition = _textBox?.CaretIndex ?? 0;
-
             _isUndoRedoOperation = true;
-            _redoStack.Push(enteredCode);
-            string previousState = _undoStack.Pop();
-            EnteredCode = previousState;
+
+            _redoStack.Push((enteredCode, _textBox?.CaretIndex ?? 0));
+
+            var (previousText, previousCaretPosition) = _undoStack.Pop();
+            EnteredCode = previousText;
+
             _isUndoRedoOperation = false;
 
             if (_textBox != null)
             {
-                _textBox.CaretIndex = Math.Min(caretPosition, _textBox.Text.Length);
+                _textBox.CaretIndex = Math.Min(previousCaretPosition, previousText.Length);
             }
         }
     }
-
 
     private void Redo()
     {
         if (_redoStack.Count > 0)
         {
-            int caretPosition = _textBox?.CaretIndex ?? 0;
-
             _isUndoRedoOperation = true;
-            _undoStack.Push(enteredCode);
-            string redoState = _redoStack.Pop();
-            EnteredCode = redoState;
-            _isUndoRedoOperation = false;
+            _undoStack.Push((enteredCode, _textBox?.CaretIndex ?? 0));
 
+            var (redoText, redoCaretPosition) = _redoStack.Pop();
+            EnteredCode = redoText;
+
+            _isUndoRedoOperation = false;
             if (_textBox != null)
             {
-                _textBox.CaretIndex = redoState.Length;
+                _textBox.CaretIndex = Math.Min(redoCaretPosition, redoText.Length);
             }
         }
     }
