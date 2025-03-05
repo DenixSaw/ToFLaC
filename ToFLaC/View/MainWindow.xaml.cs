@@ -27,6 +27,14 @@ public partial class MainWindow : Window
         
     }
 
+    private void codeBox_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainVM viewModel && sender is TextBox codeBox)
+        {
+            viewModel.AttachTextBox(codeBox);
+        }
+    }
+
     private void ButtonCopy_OnClick(object sender, RoutedEventArgs e)
     {
         codeBox.Copy();
@@ -166,16 +174,5 @@ public partial class MainWindow : Window
         {
             textBlockScrollViewer.ScrollToVerticalOffset(textBoxScrollViewer.VerticalOffset);
         }
-    }
-
-    // Пока что placeholder (не работает).
-    private void UndoButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        codeBox.Undo();
-    }
-
-    private void RedoButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        codeBox.Redo();
     }
 }
