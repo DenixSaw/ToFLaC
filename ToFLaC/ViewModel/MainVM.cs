@@ -50,8 +50,12 @@ public class MainVM : BaseVM
         int numbersSplits = value.Split('\n').Length - 1;
         if (numbersCount < numbersSplits)
         {
-            numbersCount += 1;
-            IndexesNumbers += $"{value.Split('\n').Length - 1}\n";
+            numbersCount = numbersSplits;
+            IndexesNumbers = IndexesNumbers.Split('\n')[0] + "\n";
+            for (int i = 1; i < numbersSplits + 1; i++)
+            {
+                IndexesNumbers += $"{i}\n";
+            }
         }
 
         if (numbersCount > numbersSplits)

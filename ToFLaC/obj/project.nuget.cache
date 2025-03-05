@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "c3HY9BByKG0=",
+  "dgSpecHash": "ikYhG+5XL1o=",
   "success": true,
   "projectFilePath": "C:\\Users\\dima2\\RiderProjects\\ToFLaC\\ToFLaC\\ToFLaC.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\dima2\\.nuget\\packages\\microsoft.web.webview2\\1.0.3116-prerelease\\microsoft.web.webview2.1.0.3116-prerelease.nupkg.sha512",
+    "C:\\Users\\dima2\\.nuget\\packages\\webview\\0.1.0\\webview.0.1.0.nupkg.sha512",
+    "C:\\Users\\dima2\\.nuget\\packages\\webview2.runtime.x64\\132.0.2957.140\\webview2.runtime.x64.132.0.2957.140.nupkg.sha512"
+  ],
   "logs": []
 }

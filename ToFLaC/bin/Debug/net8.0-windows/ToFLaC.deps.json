@@ -7,8 +7,72 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "ToFLaC/1.0.0": {
+        "dependencies": {
+          "Microsoft.Web.WebView2": "1.0.3116-prerelease",
+          "WebView2.Runtime.X64": "132.0.2957.140",
+          "Webview": "0.1.0",
+          "Microsoft.Web.WebView2.Core": "1.0.3116.0",
+          "Microsoft.Web.WebView2.WinForms": "1.0.3116.0",
+          "Microsoft.Web.WebView2.Wpf": "1.0.3116.0"
+        },
         "runtime": {
           "ToFLaC.dll": {}
+        }
+      },
+      "Microsoft.Web.WebView2/1.0.3116-prerelease": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "1.0.3116.0"
+          },
+          "runtimes/win-x64/native/WebView2Loader.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.0.3116.0"
+          },
+          "runtimes/win-x86/native/WebView2Loader.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.0.3116.0"
+          }
+        }
+      },
+      "Webview/0.1.0": {
+        "runtime": {
+          "lib/netcoreapp2.0/Webview.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "WebView2.Runtime.X64/132.0.2957.140": {
+        "dependencies": {
+          "Microsoft.Web.WebView2": "1.0.3116-prerelease"
+        }
+      },
+      "Microsoft.Web.WebView2.Core/1.0.3116.0": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Core.dll": {
+            "assemblyVersion": "1.0.3116.0",
+            "fileVersion": "1.0.3116.0"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.WinForms/1.0.3116.0": {
+        "runtime": {
+          "Microsoft.Web.WebView2.WinForms.dll": {
+            "assemblyVersion": "1.0.3116.0",
+            "fileVersion": "1.0.3116.0"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.Wpf/1.0.3116.0": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Wpf.dll": {
+            "assemblyVersion": "1.0.3116.0",
+            "fileVersion": "1.0.3116.0"
+          }
         }
       }
     }
@@ -16,6 +80,42 @@
   "libraries": {
     "ToFLaC/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2/1.0.3116-prerelease": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-F8vWHXXAyEB3Z60lxr39VnWbHQ2ortOvYxlvx4Ts1JRdrLtPrs9S8+XY5xJC38l4r8GNW3+hZvEHUkqQ2BAniA==",
+      "path": "microsoft.web.webview2/1.0.3116-prerelease",
+      "hashPath": "microsoft.web.webview2.1.0.3116-prerelease.nupkg.sha512"
+    },
+    "Webview/0.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pWgF0Glnkvw6dwD3bhOY0GWApwhPxAVISkFCUlOTyRIM/KwiCLtarQLFvbMwTzEF35uwY5M8k3fGuawadi9E2w==",
+      "path": "webview/0.1.0",
+      "hashPath": "webview.0.1.0.nupkg.sha512"
+    },
+    "WebView2.Runtime.X64/132.0.2957.140": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-28tNONUbhMyYcZyKwHAfUIzPXX5Izdm3AGXH7LFxE4UIR+51JTymEUlY/jN2ILUL8+sPhoXK/srkiJVWv5mKDQ==",
+      "path": "webview2.runtime.x64/132.0.2957.140",
+      "hashPath": "webview2.runtime.x64.132.0.2957.140.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2.Core/1.0.3116.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.WinForms/1.0.3116.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.Wpf/1.0.3116.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

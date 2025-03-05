@@ -24,7 +24,9 @@ public partial class MainWindow : Window
         openFileDialog = new OpenFileDialog();
         openFileDialog.DefaultExt = ".txt";
         openFileDialog.Filter = "Text documents (.txt)|*.txt";
-        
+
+        Closing += MenuExit_OnClickMenu;
+
     }
 
     private void codeBox_Loaded(object sender, RoutedEventArgs e)
@@ -128,9 +130,22 @@ public partial class MainWindow : Window
 
     private void MenuExit_OnClick(object sender, RoutedEventArgs e)
     {
-        if (MessageBox.Show("Закрыть приложение?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        if (MessageBox.Show("Закрыть приложение?\n Несохраненные данные будут удалены!", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             this.Close();
         else return;
+    }
+
+    private void MenuExit_OnClickMenu(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (MessageBox.Show("Закрыть приложение?\n Несохраненные данные будут удалены!", "Выход",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        {
+            e.Cancel = false;
+        }
+        else
+        {
+            e.Cancel = true;
+        }
     }
 
     private void MenuHelp_OnClick(object sender, RoutedEventArgs e)
