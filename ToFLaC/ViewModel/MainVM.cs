@@ -84,6 +84,7 @@ public class MainVM : BaseVM
         }
     }
 
+
     private void Redo()
     {
         if (_redoStack.Count > 0)
@@ -93,6 +94,7 @@ public class MainVM : BaseVM
             _isUndoRedoOperation = true;
             _undoStack.Push(enteredCode);
             string redoState = _redoStack.Pop();
+            EnteredCode = redoState;
             _isUndoRedoOperation = false;
 
             if (_textBox != null)
