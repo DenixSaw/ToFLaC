@@ -108,7 +108,7 @@
                 <Button Grid.Column="2" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="ButtonInsert_OnClick">
                     <Image Source="../Styles/IMG/insert.png"/>
                 </Button>
-                <Button Grid.Column="3" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}">
+                <Button Grid.Column="3" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Command="{Binding StartCommand}">
                     <Image Source="../Styles/IMG/playGreen.png"/>
                 </Button>
                 <Button Grid.Column="4" Width="24px" Height="24px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource RoundedButton}" Click="MenuHelp_OnClick">
@@ -136,7 +136,9 @@
             </Grid>
         </Border>
         <Border Grid.Row="3" Margin="20 0 20 20" BorderBrush="Gray" BorderThickness="0.75px">
-            <TextBlock Padding="0 3 0 0"></TextBlock>
+            <ScrollViewer>
+                <TextBlock Padding="0 3 0 0" Text="{Binding OutputText}"></TextBlock>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Window>

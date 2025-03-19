@@ -1,5 +1,6 @@
 using ToFLaC.ViewModel.Commands;
 using System.Windows.Controls;
+using ToFLaC.Model.State;
 
 namespace ToFLaC.ViewModel;
 
@@ -13,6 +14,8 @@ public class MainVM : BaseVM
     private Stack<(string Text, int CaretPosition)> _redoStack = new();
     private bool _isUndoRedoOperation = false;
     private TextBox? _textBox;
+
+    private string _outputText = string.Empty;
 
     public string EnteredCode
     {
@@ -31,6 +34,12 @@ public class MainVM : BaseVM
         }
     }
 
+    public string OutputText
+    {
+        get => _outputText;
+        set => Set(ref _outputText, value);
+    }
+
     public string IndexesNumbers
     {
         get => indexesNumbers;
@@ -39,6 +48,8 @@ public class MainVM : BaseVM
 
     public Command UndoCommand => Command.Create(Undo);
     public Command RedoCommand => Command.Create(Redo);
+
+    public Command StartCommand => Command.Create(Start);
 
     public void AttachTextBox(TextBox textBox)
     {
@@ -106,6 +117,19 @@ public class MainVM : BaseVM
             {
                 _textBox.CaretIndex = Math.Min(redoCaretPosition, redoText.Length);
             }
+        }
+    }
+
+    private void Start()
+    {
+        URLFinder _urlFinder = new();
+        List<URLPosition> _urls = new();
+        string formattedText = EnteredCode.Replace("\r", "");
+        _urls = _urlFinder.FindUrls(formattedText);
+        
+        foreach (URLPosition url in _urls )
+        {
+            OutputText += $"Обнаружена ссылка: {url.url}\nСтрока: {url.line}\nИндекс начала: {url.startIdx}\nИндекс конца: {url.endIdx}\n\n";
         }
     }
 }
