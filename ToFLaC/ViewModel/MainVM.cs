@@ -1,6 +1,9 @@
 using ToFLaC.ViewModel.Commands;
 using System.Windows.Controls;
 using ToFLaC.Model.State;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Shapes;
 
 namespace ToFLaC.ViewModel;
 
@@ -48,9 +51,14 @@ public class MainVM : BaseVM
 
     public Command UndoCommand => Command.Create(Undo);
     public Command RedoCommand => Command.Create(Redo);
-
     public Command StartCommand => Command.Create(Start);
+    public Command ClearAllCommand => Command.Create(ClearAll);
 
+    public void ClearAll()
+    {
+        EnteredCode = string.Empty;
+        OutputText = string.Empty;
+    }
     public void AttachTextBox(TextBox textBox)
     {
         _textBox = textBox;
@@ -124,12 +132,22 @@ public class MainVM : BaseVM
     {
         URLFinder _urlFinder = new();
         List<URLPosition> _urls = new();
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        string fullPath = System.IO.Path.Combine(projectDirectory, "Files", "urls.txt");
+        FileStream fileStream = File.Create(fullPath);
+        fileStream?.Close();
+        //OutputText += fullPath + "\n";
         string formattedText = EnteredCode.Replace("\r", "");
         _urls = _urlFinder.FindUrls(formattedText);
-        
-        foreach (URLPosition url in _urls )
+        using (StreamWriter writer = new StreamWriter(fullPath, false))
         {
-            OutputText += $"Обнаружена ссылка: {url.url}\nСтрока: {url.line}\nИндекс начала: {url.startIdx}\nИндекс конца: {url.endIdx}\n\n";
+            foreach (URLPosition url in _urls)
+            {
+                OutputText += $"Обнаружена ссылка: {url.url}\nСтрока: {url.line}\nИндекс начала: {url.startIdx}\nИндекс конца: {url.endIdx}\n\n";
+                //
+                //streamWriter.WriteLine(url.url);
+                writer.WriteLine(url.url);
+            }
         }
     }
 }

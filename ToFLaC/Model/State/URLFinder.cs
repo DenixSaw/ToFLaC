@@ -53,12 +53,12 @@ namespace ToFLaC.Model.State
 
         public List<URLPosition> FindUrls(string text) 
         { 
-            Text = text;
+            Text = text + ' ';
 
-            for (; CurrentIdx < text.Length; CurrentIdx++)
+            for (; CurrentIdx < Text.Length; CurrentIdx++)
             {
                 State.Enter(this);
-                if (text[CurrentIdx] == '\n')
+                if (Text[CurrentIdx] == '\n')
                     _currentLine++;
             }
 

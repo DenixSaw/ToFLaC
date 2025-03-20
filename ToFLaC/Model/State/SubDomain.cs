@@ -23,7 +23,7 @@ namespace ToFLaC.Model.State
                 _cntEnter++;
                 return;
             }
-            else if(urlFinder.Text[urlFinder.CurrentIdx - 1] != 'w' && !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx - 1]))
+            else if(urlFinder.Text[urlFinder.CurrentIdx - 1] == 'w' && _cntEnter == 3 && !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx - 1]))
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
                 urlFinder.State = new DomainPart();
@@ -52,8 +52,17 @@ namespace ToFLaC.Model.State
                 return;
             }
 
-            urlFinder.State = new FirstEnter();
-            return;
+            if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
+            {
+                urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
+                urlFinder.State = new DomainPart();
+                return;
+            }
+            else
+            {
+                urlFinder.State = new FirstEnter();
+                return;
+            }
         }
     }
 }
