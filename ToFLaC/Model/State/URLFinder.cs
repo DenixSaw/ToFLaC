@@ -1,17 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToFLaC.Model.State
+﻿namespace ToFLaC.Model.State
 {
-    public struct URLPosition(int line, int startIdx, int endIdx, string url)
+    public struct URLPosition(
+        int line, 
+        int startIdx, 
+        int endIdx,
+        string url,
+        string protocol,
+        string subDomain,
+        List<string> domain,
+        string topDomain,
+        string context
+        )
     {
         public int line = line;
         public int startIdx = startIdx;
         public int endIdx = endIdx;
         public string url = url;
+        public string protocol = protocol;
+        public string subDomain = subDomain;
+        public List<string> domain = domain;
+        public string topDomain = topDomain;
+        public string context = context;
     }
 
     public class URLFinder
@@ -30,8 +39,16 @@ namespace ToFLaC.Model.State
         public int CurrentIdx { get; set; }
         public int DomainCount { get; set; }
         public int DomainStartIdx { get; set; }
+        public int ContextStartIdx { get; set; }
 
         private List<URLPosition> _linesList;
+
+        public string Protocol { get; set; }
+        public string SubDomain { get; set; }
+        public List<string> Domain { get; set; }
+        public string TopDomain { get; set; }
+        public string Context { get; set; }
+        public List<string> States { get; set; } = new();
 
         public URLFinder()
         {
@@ -40,31 +57,52 @@ namespace ToFLaC.Model.State
             State = new FirstEnter();
         }
 
+        //public void SavePositions()
+        //{
+        //    _linesList.Add(new URLPosition(_currentLine, StartIdx, CurrentIdx, Text.Substring(StartIdx, CurrentIdx - StartIdx - 1)));
+        //}
+
         public void SavePositions()
         {
-            string[] lines = Text.Split('\n');
-            int startLineIdx = 0;
-
-            for (int i = 0; i < _currentLine - 1; i++)
-                startLineIdx += lines[i].Length + 1;
-
-            _linesList.Add(new URLPosition(_currentLine, StartIdx - startLineIdx, CurrentIdx - 1 - startLineIdx, Text.Substring(StartIdx, CurrentIdx - StartIdx - 1)));
+            _linesList.Add(new URLPosition(_currentLine, StartIdx, CurrentIdx, Text.Substring(StartIdx, CurrentIdx - StartIdx - 1), Protocol, SubDomain, Domain, TopDomain, Context));
+            ClearURLData();
         }
 
-        public List<URLPosition> FindUrls(string text) 
-        { 
-            Text = text + ' ';
+        public void ClearURLData()
+        {
+            Protocol = string.Empty;
+            SubDomain = string.Empty;
+            Domain = new List<string>();
+            TopDomain = string.Empty;
+            Context = string.Empty;
+        }
 
-            for (; CurrentIdx < Text.Length; CurrentIdx++)
-            {
-                State.Enter(this);
-                if (Text[CurrentIdx] == '\n')
-                    _currentLine++;
-            }
+        public List<URLPosition> FindUrls(string text)
+        {
+            List<string> strings = text.Split('\n').ToList();
 
-            if (State is End)
+            for (int strIdx = 0; strIdx < strings.Count; strIdx++)
             {
-                State.Enter(this);
+                if (State is not FirstEnter)
+                {
+                    State = new FirstEnter();
+                }
+
+                strings[strIdx] += " ";
+                CurrentIdx = 0;
+                _currentLine = strIdx + 1;
+
+                Text = strings[strIdx];
+
+                for (; CurrentIdx < strings[strIdx].Length;)
+                {
+                    State.Enter(this);
+                }
+
+                if (State is End)
+                {
+                    State.Enter(this);
+                }
             }
 
             return _linesList;

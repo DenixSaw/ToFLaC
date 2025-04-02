@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToFLaC.Model.State
+﻿namespace ToFLaC.Model.State
 {
     public class ProtocolF : IURLFinderState
     {
@@ -14,34 +8,51 @@ namespace ToFLaC.Model.State
         public void Enter(URLFinder urlFinder)
         {
             if (
-                (_cntEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx - 1] == 't') || 
-                (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx - 1] == 'p') || 
-                (_cntEnter == 2 && urlFinder.Text[urlFinder.CurrentIdx - 1] == ':') ||
-                (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx - 1] == '/')
+                (_cntEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx] == 't') || 
+                (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == 'p') || 
+                (_cntEnter == 2 && urlFinder.Text[urlFinder.CurrentIdx] == ':') ||
+                (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx] == '/')
                 )
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("PF");
                 _cntEnter++;
                 return;
             }
-            if (_cntEnter == 4 && urlFinder.Text[urlFinder.CurrentIdx - 1] == '/')
+            if (_cntEnter == 4 && urlFinder.Text[urlFinder.CurrentIdx] == '/')
             {
-                if (urlFinder.Text[urlFinder.CurrentIdx] == 'w')
+                if (urlFinder.Text[urlFinder.CurrentIdx + 1] == 'w')
                 {
+                    urlFinder.CurrentIdx++;
+                    urlFinder.States.Add("PF");
+                    urlFinder.Protocol = "ftp";
                     urlFinder.State = new SubDomain();
                     return;
                 }
-                else if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
+                else if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx + 1]))
                 {
                     urlFinder.State = new FirstEnter();
                     return;
                 }
                 else
                 {
-                    urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
+                    urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
+                    urlFinder.CurrentIdx++;
+                    urlFinder.States.Add("PF");
+                    urlFinder.Protocol = "ftp";
                     urlFinder.State = new DomainPart();
                     return;
                 }
             }
+            else if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
+            {
+                urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("PF");
+                urlFinder.State = new DomainPart();
+                return;
+            }
+
             urlFinder.State = new FirstEnter();
             return;
         }

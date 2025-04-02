@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToFLaC.Model.State
+﻿namespace ToFLaC.Model.State
 {
     public class TopDomainOrg : IURLFinderState
     {
@@ -14,11 +8,16 @@ namespace ToFLaC.Model.State
         {
             if (_countEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx] == 'r')
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("TDOrg");
                 _countEnter++;
                 return;
             }
             if (_countEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == 'g')
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("TDOrg");
+                urlFinder.TopDomain = "org";
                 urlFinder.State = new Path();
                 return;
             }

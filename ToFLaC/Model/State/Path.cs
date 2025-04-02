@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToFLaC.Model.State
+﻿namespace ToFLaC.Model.State
 {
     public class Path : IURLFinderState
     {
@@ -12,10 +6,15 @@ namespace ToFLaC.Model.State
         {
             if (urlFinder.Text[urlFinder.CurrentIdx] == '/')
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("PATH");
+                urlFinder.ContextStartIdx = urlFinder.CurrentIdx;
                 urlFinder.State = new Context();
                 return;
             }
 
+            urlFinder.CurrentIdx++;
+            urlFinder.States.Add("PATH");
             urlFinder.State = new End();
             return;
         }

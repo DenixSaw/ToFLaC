@@ -129,14 +129,14 @@
                 <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Hidden" x:Name="textBlockScrollViewer" ScrollChanged="TextBlockScrollViewer_ScrollChanged" >
                     <TextBlock Text="{Binding IndexesNumbers, UpdateSourceTrigger=PropertyChanged}" Background="#eaeaea" Padding="5px 0px 0px 0px" />
                 </ScrollViewer>
-                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" x:Name="textBoxScrollViewer" ScrollChanged="TextBoxScrollViewer_ScrollChanged">
-                    <TextBox x:Name="codeBox" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding EnteredCode, UpdateSourceTrigger=PropertyChanged}">
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="textBoxScrollViewer" ScrollChanged="TextBoxScrollViewer_ScrollChanged">
+                    <TextBox x:Name="codeBox" AcceptsReturn="True" Text="{Binding EnteredCode, UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                 </ScrollViewer>
             </Grid>
         </Border>
         <Border Grid.Row="3" Margin="20 0 20 20" BorderBrush="Gray" BorderThickness="0.75px">
-            <ScrollViewer>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <TextBlock Padding="0 3 0 0" Text="{Binding OutputText}"></TextBlock>
             </ScrollViewer>
         </Border>

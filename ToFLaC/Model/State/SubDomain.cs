@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToFLaC.Model.State
+﻿namespace ToFLaC.Model.State
 {
     public class SubDomain : IURLFinderState
     {
@@ -15,46 +9,58 @@ namespace ToFLaC.Model.State
         public void Enter(URLFinder urlFinder)
         {
             if (
-                (_cntEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx - 1] == 'w') ||
-                (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx - 1] == 'w') ||
-                (_cntEnter == 2 && urlFinder.Text[urlFinder.CurrentIdx - 1] == 'w')
+                (_cntEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx] == 'w') ||
+                (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == 'w') ||
+                (_cntEnter == 2 && urlFinder.Text[urlFinder.CurrentIdx] == 'w')
                 )
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("SD");
                 _cntEnter++;
                 return;
             }
-            else if(urlFinder.Text[urlFinder.CurrentIdx - 1] == 'w' && _cntEnter == 3 && !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx - 1]))
+            else if(urlFinder.Text[urlFinder.CurrentIdx] == 'w' && _cntEnter == 3 && !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx + 1]))
             {
-                urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
+                urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("D");
                 urlFinder.State = new DomainPart();
                 return;
             }
 
-            if (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx - 1] == '1')
+            if (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx] == '1')
             {
                 _isWithOne = true;
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("SD1");
                 _cntEnter++;
                 return;
             }
-            else if (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx - 1] == '.' &&
-                !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
+            else if (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx] == '.' &&
+                !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx + 1]))
             {
-                urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
+                urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("SD");
+                urlFinder.SubDomain = "www";
                 urlFinder.State = new DomainPart();
                 return;
             }
 
-            if (_cntEnter == 4 && _isWithOne && urlFinder.Text[urlFinder.CurrentIdx - 1] == '.' &&
-                !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
+            if (_cntEnter == 4 && _isWithOne && urlFinder.Text[urlFinder.CurrentIdx] == '.' &&
+                !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx + 1]))
             {
-                urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
+                urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("SD1");
+                urlFinder.SubDomain = "www1";
                 urlFinder.State = new DomainPart();
                 return;
             }
 
             if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
             {
-                urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
+                urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                 urlFinder.State = new DomainPart();
                 return;
             }

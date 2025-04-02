@@ -15,9 +15,13 @@ namespace ToFLaC.Model.State
         {
             if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]) && _cntChars < 30)
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("C");
                 _cntChars++;
                 if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
                 {
+                    urlFinder.CurrentIdx++;
+                    urlFinder.Context = urlFinder.Text.Substring(urlFinder.ContextStartIdx, urlFinder.CurrentIdx - urlFinder.ContextStartIdx);
                     urlFinder.State = new End();
                     return;
                 }
@@ -25,6 +29,9 @@ namespace ToFLaC.Model.State
             }
             else
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("C");
+                urlFinder.Context = urlFinder.Text.Substring(urlFinder.ContextStartIdx, urlFinder.CurrentIdx - urlFinder.ContextStartIdx);
                 urlFinder.State = new End();
                 return;
             }

@@ -87,11 +87,27 @@ public class MainVM : BaseVM
         {
             foreach (URLPosition url in _urls)
             {
-                OutputText += $"���������� ������: {url.url}\n������: {url.line}\n������ ������: {url.startIdx}\n������ �����: {url.endIdx}\n\n";
-                //
-                //streamWriter.WriteLine(url.url);
-                writer.WriteLine(url.url);
+                string domains = string.Empty;
+                foreach (string domain in url.domain)
+                    domains += domain + " ";
+
+                OutputText += $"Найдена ссылка: {url.url}\nСтрока: {url.line}\nИндекс начала ссылки: {url.startIdx}\nИндекс конца ссылки: {url.endIdx}\nПротокол: {url.protocol}\nПоддомен: {url.subDomain}\nДомены: {domains}\nДомен верхнего уровня: {url.topDomain}\nКонтекст: {url.context}\n\n";
+
+                writer.WriteLine($"Найдена ссылка: {url.url}\nСтрока: {url.line}\nИндекс начала ссылки: {url.startIdx}\nИндекс конца ссылки: {url.endIdx}\nПротокол: {url.protocol}\nПоддомен: {url.subDomain}\nДомены: {domains}\nДомен верхнего уровня: {url.topDomain}\nКонтекст: {url.context}\n\n");
             }
+
+            OutputText += "История переходов:\n";
+            //foreach (var state in _urlFinder.States)
+            //{
+            //    OutputText += state + " -> ";
+            //}
+            for (int i = 0; i < _urlFinder.States.Count; i++)
+            {
+                OutputText += _urlFinder.States[i];
+                if (i != _urlFinder.States.Count - 1)
+                    OutputText += " -> ";
+            }
+            OutputText += "\n\n";
         }
     }
 }

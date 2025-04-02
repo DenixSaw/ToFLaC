@@ -6,19 +6,22 @@
 
         public void Enter(URLFinder urlFinder)
         {
-            if (urlFinder.Text[urlFinder.CurrentIdx - 1] == 'h')
+            if (urlFinder.Text[urlFinder.CurrentIdx] == 'h')
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("PH");
                 urlFinder.State = new ProtocolH();
                 return;
             }
-            else if (urlFinder.Text[urlFinder.CurrentIdx - 1] == 'f')
+            else if (urlFinder.Text[urlFinder.CurrentIdx] == 'f')
             {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("PF");
                 urlFinder.State = new ProtocolF();
                 return;
             }
             else if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
             {
-                urlFinder.CurrentIdx--;
                 urlFinder.State = new SubDomain();
                 return;
             }

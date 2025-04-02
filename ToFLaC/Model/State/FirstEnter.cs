@@ -3,10 +3,19 @@
     public class FirstEnter : IURLFinderState
     {
         private string _forbiddenChars = " .-!@#$%^&*()=+{}[]|\\:;\"'<>,?/`~";
+
         public void Enter(URLFinder urlFinder)
         {
-            if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx])) return;
+            urlFinder.ClearURLData();
+            urlFinder.DomainCount = 0;
+            if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx])) 
+            {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("ERR");
+                return;
+            }
             urlFinder.StartIdx = urlFinder.CurrentIdx;
+            urlFinder.States.Add("FE");
             urlFinder.State = new Protocol();
         }
     }

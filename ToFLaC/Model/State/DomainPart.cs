@@ -9,6 +9,9 @@
             if (urlFinder.Text[urlFinder.CurrentIdx] == '.')
             {
                 urlFinder.DomainCount++;
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add("D");
+                urlFinder.Domain.Add(urlFinder.Text.Substring(urlFinder.DomainStartIdx, urlFinder.CurrentIdx - urlFinder.DomainStartIdx - 1));
                 urlFinder.State = new NextDomain();
                 return;
             }
@@ -16,9 +19,13 @@
                 urlFinder.CurrentIdx - urlFinder.DomainStartIdx > 63)
             {
                 urlFinder.DomainCount = 0;
+                urlFinder.States.Add("ERR");
                 urlFinder.State = new FirstEnter();
                 return;
             }
+            urlFinder.CurrentIdx++;
+            urlFinder.States.Add("D");
+            return;
         }
     }
 }
