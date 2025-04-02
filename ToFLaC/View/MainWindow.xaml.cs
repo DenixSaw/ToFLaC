@@ -8,7 +8,7 @@ namespace ToFLaC.View;
 
 public partial class MainWindow : Window
 {
-    private SaveFileDialog saveFileDialog;
+     private SaveFileDialog saveFileDialog;
     private OpenFileDialog openFileDialog;
     private string fileName = string.Empty;
     
@@ -26,14 +26,21 @@ public partial class MainWindow : Window
         openFileDialog.Filter = "Text documents (.txt)|*.txt";
 
         Closing += MenuExit_OnClickMenu;
-
     }
 
-    private void codeBox_Loaded(object sender, RoutedEventArgs e)
+    private void TextBlockScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
-        if (DataContext is MainVM viewModel && sender is TextBox codeBox)
+        if (e.VerticalChange != 0)
         {
-            viewModel.AttachTextBox(codeBox);
+            textBoxScrollViewer.ScrollToVerticalOffset(textBlockScrollViewer.VerticalOffset);
+        }
+    }
+
+    private void TextBoxScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (e.VerticalChange != 0)
+        {
+            textBlockScrollViewer.ScrollToVerticalOffset(textBoxScrollViewer.VerticalOffset);
         }
     }
 
@@ -52,109 +59,6 @@ public partial class MainWindow : Window
         codeBox.Paste();
     }
 
-    private void ButtonSaveAs_OnClick(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult resultOfBox = MessageBox.Show("Уверены, что хотите сохранить файл?","Сохранение",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (resultOfBox == MessageBoxResult.Yes)
-        {
-            if (fileName != string.Empty)
-            {
-                saveFileDialog.FileName = fileName;
-            }
-            bool? result = saveFileDialog.ShowDialog();
-            if (result == true)
-            {
-                File.WriteAllText(saveFileDialog.FileName, codeBox.Text);
-            }
-        }
-    }
-    
-    private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult resultOfBox = MessageBox.Show("Уверены, что хотите сохранить файл?","Сохранение",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (resultOfBox == MessageBoxResult.Yes)
-        {
-            if (fileName != string.Empty || fileName != "")
-            {
-                saveFileDialog.FileName = fileName;
-                File.WriteAllText(saveFileDialog.FileName, codeBox.Text);
-            } else if (fileName == "")
-            {
-                bool? result = saveFileDialog.ShowDialog();
-                if (result == true)
-                {
-                    File.WriteAllText(saveFileDialog.FileName, codeBox.Text);
-                    fileName = saveFileDialog.FileName;
-                }
-            }
-        }
-    }
-
-    private void ButtonOpen_OnClick(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult resultOfBox = MessageBox.Show("Уверены, что хотите открыть файл? Несохраненные данные будут удалены","Открытие файла",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (resultOfBox == MessageBoxResult.Yes)
-        {
-            bool? result = openFileDialog.ShowDialog();
-            fileName = openFileDialog.FileName;
-            if (result == true)
-            {
-                codeBox.Text = File.ReadAllText(openFileDialog.FileName);
-                if (DataContext is MainVM viewModel)
-                {
-                    viewModel.AttachTextBox(codeBox);
-                }
-            }
-        }
-    }
-
-    private void ButtonCreate_OnClick(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult resultOfBox = MessageBox.Show("Уверены, что создать новый файл? Несохраненные данные будут удалены","Создание нового файла",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (resultOfBox == MessageBoxResult.Yes)
-        {
-            codeBox.Clear();
-            fileName = "";
-            if (DataContext is MainVM viewModel)
-            {
-                viewModel.AttachTextBox(codeBox);
-            }
-        }
-    }
-
-    private void MenuDelete_OnClick(object sender, RoutedEventArgs e)
-    {
-        codeBox.Clear();
-    }
-
-    private void MenuSelect_OnClick(object sender, RoutedEventArgs e)
-    {
-        codeBox.SelectAll();
-    }
-
-    private void MenuExit_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (MessageBox.Show("Закрыть приложение?\n Несохраненные данные будут удалены!", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            this.Close();
-    }
-
-    private void MenuExit_OnClickMenu(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-        if (MessageBox.Show("Закрыть приложение?\n Несохраненные данные будут удалены!", "Выход",
-                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-        {
-            e.Cancel = false;
-        }
-        else
-        {
-            e.Cancel = true;
-        }
-    }
-
     private void MenuHelp_OnClick(object sender, RoutedEventArgs e)
     {
         string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
@@ -166,14 +70,135 @@ public partial class MainWindow : Window
         {
             HelpWindow helpWindow = new HelpWindow(fullPath);
             helpWindow.ShowDialog();
-            //Uri uri = new Uri(fullPath);
-            //this.webBrowser1.Source = uri;
-            //System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(fullPath) { UseShellExecute = true });
         }
         else
         {
             MessageBox.Show($"Файл не найден: {fullPath}");
         }
+    }
+
+    private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
+    {
+       SaveFile(sender, e);
+    }
+
+    private void ButtonOpen_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(fileName) || !string.IsNullOrEmpty(codeBox.Text))
+        {
+            MessageBoxResult result = MessageBox.Show(
+                "Хотите сохранить файл перед открытием нового файла?",
+                "Подтверждение",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SaveFile(sender, e);
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        if (openFileDialog.ShowDialog() == true)
+        {
+            codeBox.Text = File.ReadAllText(openFileDialog.FileName);
+            fileName = openFileDialog.FileName;
+        }
+    }
+    
+    private void SaveFile(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(fileName))
+        {
+            SaveFileAs(sender, e);
+        }
+        else
+        {
+            File.WriteAllText(fileName, codeBox.Text);
+        }
+    }
+    
+    private void SaveFileAs(object sender, RoutedEventArgs e)
+    {
+        SaveFileDialog saveFileDialog = new SaveFileDialog
+        {
+            Filter = "Text Files (*.txt)|*.txt",
+            DefaultExt = ".txt"
+        };
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            File.WriteAllText(saveFileDialog.FileName, codeBox.Text);
+            fileName = saveFileDialog.FileName;
+        }
+    }
+
+    private void ButtonCreate_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(fileName) || !string.IsNullOrEmpty(codeBox.Text))
+        {
+            MessageBoxResult result = MessageBox.Show(
+                "Хотите сохранить файл перед созданием нового файла?",
+                "Подтверждение",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SaveFile(sender, e);
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        codeBox.Clear();
+        fileName = string.Empty;
+    }
+
+    private void MenuSelect_OnClick(object sender, RoutedEventArgs e)
+    {
+        codeBox.SelectAll();
+    }
+
+    private void MenuDelete_OnClick(object sender, RoutedEventArgs e)
+    {
+        codeBox.Clear();
+    }
+
+    private void MenuExit_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(fileName) || !string.IsNullOrEmpty(codeBox.Text))
+        {
+
+
+            MessageBoxResult result = MessageBox.Show(
+                "У вас есть несохраненные изменения. Хотите сохранить файл перед выходом?",
+                "Подтверждение выхода",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SaveFileAs(sender, e);
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+        }
+
+
+        Application.Current.Shutdown();
+    }
+
+    private void ButtonSaveAs_OnClick(object sender, RoutedEventArgs e)
+    {
+        SaveFileAs(sender, e);
     }
 
     private void MenuAboutProgram_OnClick(object sender, RoutedEventArgs e)
@@ -182,19 +207,37 @@ public partial class MainWindow : Window
         aboutProgramWindow.ShowDialog();
     }
     
-    private void TextBlockScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    private void MenuExit_OnClickMenu(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        if (e.VerticalChange != 0)
+        if (!string.IsNullOrEmpty(fileName) || !string.IsNullOrEmpty(codeBox.Text))
         {
-            textBoxScrollViewer.ScrollToVerticalOffset(textBlockScrollViewer.VerticalOffset);
+            MessageBoxResult result = MessageBox.Show(
+                "У вас есть несохраненные изменения. Хотите сохранить файл перед выходом?",
+                "Подтверждение выхода",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SaveFileAs(sender, new RoutedEventArgs());
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
         }
+
+
+        Application.Current.Shutdown();
     }
 
-    private void TextBoxScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    private void ButtonUndo_OnClick(object sender, RoutedEventArgs e)
     {
-        if (e.VerticalChange != 0)
-        {
-            textBlockScrollViewer.ScrollToVerticalOffset(textBoxScrollViewer.VerticalOffset);
-        }
+        codeBox.Undo();
+    }
+
+    private void ButtonRedo_OnClick(object sender, RoutedEventArgs e)
+    {
+        codeBox.Redo();
     }
 }
