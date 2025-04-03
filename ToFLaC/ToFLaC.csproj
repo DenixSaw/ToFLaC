@@ -80,6 +80,14 @@
       <None Update="View\Help.html">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Remove="Styles\IMG\Диаграмма.png" />
+      <Resource Include="Styles\IMG\Диаграмма.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\table.png" />
+      <Resource Include="Styles\IMG\table.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>

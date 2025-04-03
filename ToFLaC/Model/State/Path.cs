@@ -14,7 +14,6 @@
             }
 
             urlFinder.CurrentIdx++;
-            urlFinder.States.Add("PATH");
             urlFinder.State = new End();
             return;
         }
