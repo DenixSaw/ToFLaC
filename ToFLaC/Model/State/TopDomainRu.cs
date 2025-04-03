@@ -13,7 +13,7 @@ namespace ToFLaC.Model.State
             if (urlFinder.Text[urlFinder.CurrentIdx] == 'u')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("TDRu");
+                urlFinder.States.Add("TDRu2");
                 urlFinder.TopDomain = "ru";
                 urlFinder.State = new Path();
                 return;

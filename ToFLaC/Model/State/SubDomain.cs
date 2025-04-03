@@ -15,7 +15,7 @@
                 )
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("SD");
+                urlFinder.States.Add($"SD{_cntEnter + 1}");
                 _cntEnter++;
                 return;
             }
@@ -32,7 +32,7 @@
             {
                 _isWithOne = true;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("SD1");
+                urlFinder.States.Add("SD1_1");
                 _cntEnter++;
                 return;
             }
@@ -41,7 +41,7 @@
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("SD");
+                urlFinder.States.Add("SD4");
                 urlFinder.SubDomain = "www";
                 urlFinder.State = new DomainPart();
                 return;
@@ -52,7 +52,7 @@
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("SD1");
+                urlFinder.States.Add("SD1_2");
                 urlFinder.SubDomain = "www1";
                 urlFinder.State = new DomainPart();
                 return;
@@ -60,7 +60,7 @@
 
             if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
             {
-                urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
+                urlFinder.DomainStartIdx = (urlFinder.CurrentIdx - _cntEnter);
                 urlFinder.State = new DomainPart();
                 return;
             }

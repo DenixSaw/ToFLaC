@@ -9,14 +9,14 @@
             if (urlFinder.Text[urlFinder.CurrentIdx] == 'h')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PH");
+                urlFinder.States.Add("PH1");
                 urlFinder.State = new ProtocolH();
                 return;
             }
             else if (urlFinder.Text[urlFinder.CurrentIdx] == 'f')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PF");
+                urlFinder.States.Add("PF1");
                 urlFinder.State = new ProtocolF();
                 return;
             }

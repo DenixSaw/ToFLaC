@@ -11,7 +11,6 @@
             if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx])) 
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("ERR");
                 return;
             }
             urlFinder.StartIdx = urlFinder.CurrentIdx;

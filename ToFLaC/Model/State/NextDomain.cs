@@ -8,30 +8,30 @@
 
         public void Enter(URLFinder urlFinder)
         {
+            urlFinder.States.Add("ND");
             if (urlFinder.Text[urlFinder.CurrentIdx] == 'r')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("TDRu");
+                urlFinder.States.Add("TDRu1");
                 urlFinder.State = new TopDomainRu();
                 return;
             }
             if (urlFinder.Text[urlFinder.CurrentIdx] == 'c')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("TDCom");
+                urlFinder.States.Add("TDCom1");
                 urlFinder.State = new TopDomainCom();
                 return;
             }
             if (urlFinder.Text[urlFinder.CurrentIdx] == 'o')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("TDOrg");
+                urlFinder.States.Add("TDOrg1");
                 urlFinder.State = new TopDomainOrg();
                 return;
             }
             if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]) || urlFinder.DomainCount > 3)
             {
-                urlFinder.States.Add("ERR");
                 urlFinder.State = new FirstEnter();
                 return;
             }

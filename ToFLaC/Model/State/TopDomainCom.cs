@@ -9,14 +9,14 @@
             if (_countEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx] == 'o')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("TDCom");
+                urlFinder.States.Add("TDCom2");
                 _countEnter++;
                 return;
             }
             if (_countEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == 'm')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("TDCom");
+                urlFinder.States.Add("TDCom3");
                 urlFinder.TopDomain = "com";
                 urlFinder.State = new Path();
                 return;
