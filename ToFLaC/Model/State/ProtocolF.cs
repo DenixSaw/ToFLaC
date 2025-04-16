@@ -9,13 +9,21 @@
         {
             if (
                 (_cntEnter == 0 && urlFinder.Text[urlFinder.CurrentIdx] == 't') || 
-                (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == 'p') || 
+                (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == 'p')
+                )
+            {
+                urlFinder.CurrentIdx++;
+                urlFinder.States.Add($"PF{_cntEnter + 2}");
+                _cntEnter++;
+                return;
+            }
+            if (
                 (_cntEnter == 2 && urlFinder.Text[urlFinder.CurrentIdx] == ':') ||
                 (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx] == '/')
                 )
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add($"PF{_cntEnter + 2}");
+                urlFinder.States.Add($"P{_cntEnter - 1}");
                 _cntEnter++;
                 return;
             }
@@ -24,7 +32,7 @@
                 if (urlFinder.Text[urlFinder.CurrentIdx + 1] == 'w')
                 {
                     urlFinder.CurrentIdx++;
-                    urlFinder.States.Add("PF6");
+                    urlFinder.States.Add($"P{_cntEnter - 1}");
                     urlFinder.Protocol = "ftp";
                     urlFinder.State = new SubDomain();
                     return;
@@ -38,7 +46,7 @@
                 {
                     urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                     urlFinder.CurrentIdx++;
-                    urlFinder.States.Add("PF6");
+                    urlFinder.States.Add($"P{_cntEnter - 1}");
                     urlFinder.Protocol = "ftp";
                     urlFinder.State = new DomainPart();
                     return;

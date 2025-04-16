@@ -6,8 +6,6 @@
         private int _cntEnter = 0;
         private bool _isWithS = false;
 
-        public string GetNameState => "P";
-
         public void Enter(URLFinder urlFinder)
         {
             if (
@@ -26,14 +24,14 @@
             {
                 _isWithS = true;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PHs1");
+                urlFinder.States.Add("PHs");
                 _cntEnter++;
                 return;
             }
             else if (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx] == ':')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PH5");
+                urlFinder.States.Add("P1");
                 _cntEnter++;
                 return;
             }
@@ -41,14 +39,14 @@
             if (_cntEnter == 4 && _isWithS && urlFinder.Text[urlFinder.CurrentIdx] == ':')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PHs2");
+                urlFinder.States.Add("P1");
                 _cntEnter++;
                 return;
             }
             else if (_cntEnter == 4 && !_isWithS && urlFinder.Text[urlFinder.CurrentIdx] == '/')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PH6");
+                urlFinder.States.Add("P2");
                 _cntEnter++;
                 return;
             }
@@ -56,14 +54,14 @@
             if (_cntEnter == 5 && _isWithS && urlFinder.Text[urlFinder.CurrentIdx] == '/')
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PHs3");
+                urlFinder.States.Add("P2");
                 _cntEnter++;
                 return;
             }
             else if (_cntEnter == 5 && !_isWithS && urlFinder.Text[urlFinder.CurrentIdx] == '/' &&
                 !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx + 1]))
             {
-                urlFinder.States.Add("PH7");
+                urlFinder.States.Add("P3");
                 if (urlFinder.Text[urlFinder.CurrentIdx + 1] == 'w')
                 {
                     urlFinder.CurrentIdx++;
@@ -83,7 +81,7 @@
             if (_cntEnter == 6 && _isWithS && urlFinder.Text[urlFinder.CurrentIdx] == '/' &&
                 !_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx + 1]))
             {
-                urlFinder.States.Add("PHs4");
+                urlFinder.States.Add("P3");
                 if (urlFinder.Text[urlFinder.CurrentIdx + 1] == 'w')
                 {
                     urlFinder.CurrentIdx++;

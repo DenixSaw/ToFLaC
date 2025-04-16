@@ -22,7 +22,7 @@ namespace ToFLaC.Model.State
                 if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
                 {
                     urlFinder.CurrentIdx++;
-                    urlFinder.Context = urlFinder.Text.Substring(urlFinder.ContextStartIdx, urlFinder.CurrentIdx - urlFinder.ContextStartIdx);
+                    urlFinder.Context = urlFinder.Text.Substring(urlFinder.ContextStartIdx, urlFinder.CurrentIdx - urlFinder.ContextStartIdx - 1);
                     urlFinder.State = new End();
                     return;
                 }
