@@ -27,8 +27,7 @@ namespace ToFLaC.Model.State
                 {
                     urlFinder.DomainStartIdx = urlFinder.CurrentIdx - 1;
                     urlFinder.CurrentIdx++;
-                    urlFinder.States.Add($"D{urlFinder.cntDomain}");
-                    urlFinder.cntDomain++;
+                    urlFinder.States.Add("TDRu2");
                     urlFinder.State = new DomainPart();
                     return;
                 }

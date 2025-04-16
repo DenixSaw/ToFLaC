@@ -23,7 +23,7 @@
                 return;
             }
             urlFinder.CurrentIdx++;
-            urlFinder.Domain.Add(urlFinder.Text.Substring(urlFinder.DomainStartIdx, urlFinder.CurrentIdx - urlFinder.DomainStartIdx - 1));
+            //urlFinder.Domain.Add(urlFinder.Text.Substring(urlFinder.DomainStartIdx, urlFinder.CurrentIdx - urlFinder.DomainStartIdx - 1));
             urlFinder.States.Add($"D{urlFinder.cntDomain}");
             urlFinder.cntDomain++;
             return;

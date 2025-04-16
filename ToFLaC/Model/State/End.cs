@@ -2,8 +2,6 @@
 {
     public class End : IURLFinderState
     {
-        public string GetNameState => "";
-
         public void Enter(URLFinder urlFinder)
         {
             urlFinder.States.Add("END");
