@@ -29,6 +29,16 @@
                 return;
             }
 
+            if (_cntEnter == 1 && urlFinder.Text[urlFinder.CurrentIdx] == '1')
+            {
+                urlFinder.DomainStartIdx = (urlFinder.CurrentIdx - _cntEnter);
+                urlFinder.States.Add($"D{urlFinder.cntDomain}");
+                urlFinder.cntDomain++;
+                urlFinder.CurrentIdx++;
+                urlFinder.State = new DomainPart();
+                return;
+            }
+
             if (_cntEnter == 3 && urlFinder.Text[urlFinder.CurrentIdx] == '1')
             {
                 _isWithOne = true;
@@ -42,7 +52,7 @@
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("SD4");
+                urlFinder.States.Add("S");
                 urlFinder.SubDomain = "www";
                 urlFinder.State = new DomainPart();
                 return;
@@ -53,7 +63,7 @@
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("SD1_2");
+                urlFinder.States.Add("S");
                 urlFinder.SubDomain = "www1";
                 urlFinder.State = new DomainPart();
                 return;
@@ -63,6 +73,17 @@
             {
                 urlFinder.DomainStartIdx = (urlFinder.CurrentIdx - _cntEnter);
                 urlFinder.State = new DomainPart();
+                return;
+            }
+            else if (urlFinder.Text[urlFinder.CurrentIdx] == '.')
+            {
+                urlFinder.DomainStartIdx = (urlFinder.CurrentIdx - _cntEnter);
+                urlFinder.States.Add($"D{urlFinder.cntDomain}");
+                urlFinder.cntDomain++;
+                urlFinder.CurrentIdx++;
+                urlFinder.DomainCount++;
+                urlFinder.Domain.Add(urlFinder.Text.Substring(urlFinder.DomainStartIdx, urlFinder.CurrentIdx - urlFinder.DomainStartIdx - 1));
+                urlFinder.State = new NextDomain();
                 return;
             }
             else
