@@ -8,11 +8,13 @@
 
         public void Enter(URLFinder urlFinder)
         {
-            urlFinder.States.Add("ND");
+            urlFinder.States.Add($"ND{urlFinder.cntNextDomain}");
+            urlFinder.cntNextDomain++;
             if (urlFinder.Text[urlFinder.CurrentIdx] == 'r')
             {
                 urlFinder.CurrentIdx++;
                 urlFinder.States.Add("TDRu1");
+                urlFinder.cntDomain++;
                 urlFinder.State = new TopDomainRu();
                 return;
             }
@@ -20,6 +22,7 @@
             {
                 urlFinder.CurrentIdx++;
                 urlFinder.States.Add("TDCom1");
+                urlFinder.cntDomain++;
                 urlFinder.State = new TopDomainCom();
                 return;
             }
@@ -27,6 +30,7 @@
             {
                 urlFinder.CurrentIdx++;
                 urlFinder.States.Add("TDOrg1");
+                urlFinder.cntDomain++;
                 urlFinder.State = new TopDomainOrg();
                 return;
             }
@@ -38,7 +42,8 @@
 
             urlFinder.DomainStartIdx = urlFinder.CurrentIdx;
             urlFinder.CurrentIdx++;
-            urlFinder.States.Add("D");
+            urlFinder.States.Add($"D{urlFinder.cntDomain}");
+            urlFinder.cntDomain++;
             urlFinder.State = new DomainPart();
             return;
         }

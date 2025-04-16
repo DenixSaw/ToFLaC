@@ -49,6 +49,9 @@
         public string TopDomain { get; set; }
         public string Context { get; set; }
         public List<string> States { get; set; } = new();
+        public int cntDomain { get; set; } = 1;
+        public int cntNextDomain { get; set; } = 1;
+        public int cntContext { get; set; } = 1;
 
         public URLFinder()
         {

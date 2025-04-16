@@ -10,7 +10,7 @@
             {
                 urlFinder.DomainCount++;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("D");
+                urlFinder.States.Add($"D{urlFinder.cntDomain}");
                 urlFinder.Domain.Add(urlFinder.Text.Substring(urlFinder.DomainStartIdx, urlFinder.CurrentIdx - urlFinder.DomainStartIdx-1));
                 urlFinder.State = new NextDomain();
                 return;
@@ -23,7 +23,8 @@
                 return;
             }
             urlFinder.CurrentIdx++;
-            urlFinder.States.Add("D");
+            urlFinder.States.Add($"D{urlFinder.cntDomain}");
+            urlFinder.cntDomain++;
             return;
         }
     }

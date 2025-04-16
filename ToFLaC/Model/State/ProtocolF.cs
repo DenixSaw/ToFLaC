@@ -48,7 +48,8 @@
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx - _cntEnter - 1;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("PF6");
+                urlFinder.States.Add($"D{urlFinder.cntDomain}");
+                urlFinder.cntDomain++;
                 urlFinder.State = new DomainPart();
                 return;
             }

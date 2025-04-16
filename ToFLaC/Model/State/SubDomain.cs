@@ -23,7 +23,8 @@
             {
                 urlFinder.DomainStartIdx = urlFinder.CurrentIdx + 1;
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("D");
+                urlFinder.States.Add($"D{urlFinder.cntDomain}");
+                urlFinder.cntDomain++;
                 urlFinder.State = new DomainPart();
                 return;
             }

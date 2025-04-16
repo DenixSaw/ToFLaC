@@ -16,7 +16,8 @@ namespace ToFLaC.Model.State
             if (!_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]) && _cntChars < 30)
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("C");
+                urlFinder.States.Add($"C{urlFinder.cntContext}");
+                urlFinder.cntContext++;
                 _cntChars++;
                 if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx]))
                 {
@@ -30,7 +31,8 @@ namespace ToFLaC.Model.State
             else
             {
                 urlFinder.CurrentIdx++;
-                urlFinder.States.Add("C");
+                urlFinder.States.Add($"C{urlFinder.cntContext}");
+                urlFinder.cntContext++;
                 urlFinder.Context = urlFinder.Text.Substring(urlFinder.ContextStartIdx, urlFinder.CurrentIdx - urlFinder.ContextStartIdx);
                 urlFinder.State = new End();
                 return;

@@ -8,6 +8,9 @@
         {
             urlFinder.ClearURLData();
             urlFinder.DomainCount = 0;
+            urlFinder.cntDomain = 1;
+            urlFinder.cntNextDomain = 1;
+            urlFinder.cntContext = 1;
             if (_forbiddenChars.Contains(urlFinder.Text[urlFinder.CurrentIdx])) 
             {
                 urlFinder.CurrentIdx++;
