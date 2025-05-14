@@ -52,6 +52,12 @@
                 <MenuItem Header="Вызов справки" Click="MenuHelp_OnClick"/>
                 <MenuItem Header="О программе" Click="MenuAboutProgram_OnClick"/>
             </MenuItem>
+            <MenuItem Header="Рекурсивный спуск"  Padding="10 2 10 0 ">
+                <MenuItem Header="Грамматика"/>
+                <MenuItem Header="Язык"/>
+                <MenuItem Header="Классификация"/>
+                <MenuItem Header="Тестовый пример"/>
+            </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Margin="20 0 20 0">
             <Grid.ColumnDefinitions>
