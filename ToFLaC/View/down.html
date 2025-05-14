@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Справка</title>
+    <style>
+        .grammar-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .grammar-main {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .grammar-heading {
+            color: #2c3e50;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+
+        .grammar-text {
+            display: inline-block;
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+
+        .grammar-linebreak {
+            margin-bottom: 10px;
+        }
+
+        .grammar-rule {
+            font-family: 'Courier New', monospace;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        .grammar-definition {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin: 10px 0;
+        }
+
+        .grammar-example {
+            background-color: #e8f4f8;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .grammar-strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="grammar-container">
+    <main class="grammar-main">
+        <h2 class="grammar-heading">Грамматика G[E]:</h2>
+        <div class="grammar-definition">
+            <span class="grammar-text grammar-rule">E  => TA</span><br class="grammar-linebreak">
+            <span class="grammar-text grammar-rule">A => ε | + TA | - TA</span><br class="grammar-linebreak">
+            <span class="grammar-text grammar-rule">T => OB</span><br class="grammar-linebreak">
+            <span class="grammar-text grammar-rule">B => ε | *OB | / OB</span><br class="grammar-linebreak">
+            <span class="grammar-text grammar-rule">O => num | id | (E)</span>
+        </div>
+
+        <div class="grammar-definition">
+            <span class="grammar-text">num - числовая константа Ц{Ц}</span><br class="grammar-linebreak">
+            <span class="grammar-text">id - идентификатор Б{Б|Ц}</span><br class="grammar-linebreak">
+            <span class="grammar-text">Б - [A, B, …, Z], Ц - [0, 1, …, 9]</span>
+        </div>
+
+        <h2 class="grammar-heading">Язык</h2>
+        <div class="grammar-definition">
+            <span class="grammar-text">L(G[Е]) = {x &isin; VT* | E =>* x}</span><br class="grammar-linebreak">
+            <span class="grammar-text">VT = {num, id, +, -, *, /, (, )}</span><br class="grammar-linebreak">
+            <span class="grammar-text">VN = {E, A, T, B, O}</span><br class="grammar-linebreak">
+            <span class="grammar-text">Е - начальный нетерминал</span>
+        </div>
+
+        <h2 class="grammar-heading">Тестовый пример</h2>
+        <div class="grammar-example">
+            <span class="grammar-text"><span class="grammar-strong">Выражение:</span> (45+a)*25</span><br class="grammar-linebreak"><br class="grammar-linebreak">
+            <span class="grammar-text">
+                <span class="grammar-strong">Последовательность разбора:</span><br class="grammar-linebreak">
+                E__T__O__(__E__T__O__num__B__ε__A__+__T__O__id__B__ε__A__ε__)__B__*__O__num__B__ε__A__ε
+            </span>
+        </div>
+
+        <h2 class="grammar-heading">Классификация</h2>
+        <div class="grammar-definition">
+            <span class="grammar-text">Согласно классификации Хомского, грамматика G[E] является контекстно-свободной.</span><br class="grammar-linebreak">
+            <span class="grammar-text">Все правила относятся к классу продукций: A => a, A &isin; Vn, а &isin; V*</span>
+        </div>
+    </main>
+</body>
+</html>

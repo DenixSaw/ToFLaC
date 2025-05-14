@@ -240,4 +240,22 @@ public partial class MainWindow : Window
     {
         codeBox.Redo();
     }
+
+    private void MenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "down.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
 }
